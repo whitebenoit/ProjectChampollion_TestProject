@@ -10,6 +10,9 @@ public class LogManager
     private string logName;
 
     #region Singleton
+    // This is a singleton (design pattern). The singleton is an object that can only be instantiated once.
+    // All further call will return the first instance, so you now that any instance from anywhere in the code
+    // of a singleton is the same instance.
     private LogManager()
     {
         Init();
@@ -29,7 +32,10 @@ public class LogManager
 
 
     
-
+    /// <summary>
+    /// Log the provided string into the file for this game
+    /// </summary>
+    /// <param name="logString"></param>
     public void Log(string logString)
     {
         string path = Application.dataPath + "/" + folderName + "/" + logName;
@@ -40,7 +46,7 @@ public class LogManager
         }
          
 
-        //Debug
+        //Debug - Read all lines from the file at path
         //using (StreamReader streamReader = new StreamReader(path))
         //{
         //    int i = 0;
@@ -58,9 +64,12 @@ public class LogManager
 
     private void Init()
     {
+        // Create a new filename for the log file
         string[] filenameArray = Directory.GetFiles(Application.dataPath + "/" + folderName);
         logName = "Log_" + filenameArray.Length/2 + System.DateTime.Now.ToString("_yyyyMMdd_HHmm")+".txt";
         string path = Application.dataPath + "/" + folderName + "/" + logName;
+
+        // Then create said file (only if it doesn't exist)
         if (!File.Exists(path))
         {
             FileStream fileStream = File.Create(path);

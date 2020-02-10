@@ -17,12 +17,14 @@ public class FileLoader : MonoBehaviour
 
     private void Start()
     {
-        InputController.instance.loadingCallbacks.Add(LoadFiles);
+        InputController.instance.loadingCallbacks.Add(LoadAllFilesInFolder);
     }
 
 
-
-    public void LoadFiles()
+    /// <summary>
+    /// Load all files (except .meta) from the folder folderName and spawn SpawnerPrefab for each one using their content
+    /// </summary>
+    public void LoadAllFilesInFolder()
     {
 
 
